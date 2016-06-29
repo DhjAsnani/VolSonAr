@@ -1,32 +1,51 @@
 package com.example.gohan.volsonar;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 /**
  * Created by Freeware Sys on 29-Jun-16.
  */
-public class RecyclerAdapter extends RecyclerView.Adapter {
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
+
+    ArrayList<contact> arrayList = new ArrayList<contact>();
+
+    public RecyclerAdapter(ArrayList<contact> arrayList)
+    {
+        this.arrayList = arrayList;
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item,parent,false);
+        MyViewHolder myViewHolder = new MyViewHolder(view);
+        return myViewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(MyViewHolder holder, int position) {
+        holder.name.setText(arrayList.get(position).getName());
+        holder.email.setText(arrayList.get(position).getEmail());
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return arrayList.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
+        TextView name,email;
         public MyViewHolder(View itemView) {
             super(itemView);
+            name = (TextView) itemView.findViewById(R.id.req_txt_name);
+            email = (TextView) itemView.findViewById(R.id.req_txt_email);
         }
     }
 }
