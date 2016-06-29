@@ -49,7 +49,7 @@ public class BackgroundTask {
                 error.printStackTrace();
             }
         });
-
+        Singleton.getInstance(context).addToRequestQ(jsonArrayRequest);
         return arrayList;
     }
 

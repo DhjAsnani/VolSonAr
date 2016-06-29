@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class display_list extends AppCompatActivity {
 
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
     RecyclerView.LayoutManager layoutManager;
+    ArrayList<contact> arrayList = new ArrayList<contact>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,5 +21,9 @@ public class display_list extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
+        BackgroundTask backgroundTask = new BackgroundTask(display_list.this);
+        arrayList = backgroundTask.getArrayList();
+        adapter = new RecyclerAdapter(arrayList);
+        recyclerView.setAdapter(adapter);
     }
 }
